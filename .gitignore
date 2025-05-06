@@ -1,1 +1,16 @@
-credentials/credenciales.json
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+env/
+venv/
+
+# Streamlit config
+.streamlit/
+
+# Environment variables and secrets
+.env
+*.env
+credentials/
+*.json
