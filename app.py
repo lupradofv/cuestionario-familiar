@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import datetime
 import os
+import json
 
 from correccion import procesar_cuestionario
 from utils import asociar_id
@@ -28,7 +29,8 @@ if USE_GOOGLE_SHEETS:
     import gspread
     from oauth2client.service_account import ServiceAccountCredentials
     SCOPE = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    CREDS = ServiceAccountCredentials.from_json_keyfile_name("credentials/credenciales.json", SCOPE)
+    creds_dict = json.loads(st.secrets["GOOGLE_CREDENTIALS"])
+    CREDS = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, SCOPE)
     CLIENT = gspread.authorize(CREDS)
     SHEET = CLIENT.open("Respuestas Cuestionario IA").worksheet("Respuestas")
     SHEET_IDMAP = CLIENT.open("Respuestas Cuestionario IA").worksheet("Correspondencia")
