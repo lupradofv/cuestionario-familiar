@@ -40,8 +40,8 @@ cuestionario-familiar/
 
 1. Clona este repositorio:
 ```bash
-git clone https://github.com/tu_usuario/cuest-familiar.git
-cd cuest-familiar
+git clone https://github.com/lupradofv/cuestionario-familiar.git 
+cd cuestionario-familiar
 ```
 
 2. Instala dependencias:
