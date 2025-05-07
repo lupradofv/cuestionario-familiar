@@ -104,7 +104,7 @@ if consentimiento:
         ########################################################################
         # 2. Relación Familiar
         ########################################################################
-        st.header(t("## 👨‍👩‍👦 Bloque 1", "## 👨‍👩‍👦 Block 1"))
+        st.header(t("##👨‍👩‍👦 Bloque 1", "##👨‍👩‍👦 Block 1"))
         nombre_paciente = st.text_input(t("Nombre del paciente", "Patient's full name"))
         apellido_paciente = st.text_input(t("Apellido del paciente", "Patient's last name"))
         centro = st.text_input(t("Centro de atención", "Care center"))
@@ -164,8 +164,8 @@ if consentimiento:
         st.progress(15, text="⏳ Has completado aproximadamente el 15% del cuestionario")
         
         st.divider()
-        st.markdown(t("### 👨‍👩‍👧‍👦 ¡Ahora continuamos! Más preguntas sobre ti y tu familia."), 
-                    ("### 👨‍👩‍👧‍👦 Let's continue! More questions about you and your family."))
+        st.markdown(t("### 👨‍👩‍👧‍👦 ¡Ahora continuamos! Más preguntas sobre ti y tu familia.", 
+                    "### 👨‍👩‍👧‍👦 Let's continue! More questions about you and your family."))
 
         ##############################################################################################################
         # Diferenciación del Self (Escala de 1-6) 🙇‍♀️🙇
@@ -250,8 +250,8 @@ if consentimiento:
                     "⏳ You've completed 35% of the questionnaire!"))
         
         st.divider()
-        st.markdown(t("### 🌟 ¡Buen trabajo! Vamos a seguir..."),
-                    ("### 🌟 Good job! Let's continue..."))
+        st.markdown(t("### 🌟 ¡Buen trabajo! Vamos a seguir...",
+                    "### 🌟 Good job! Let's continue..."))
 
         ##############################################################################################################
         # Funcionamiento Familiar (Escala de 1-5) 🏠💬
@@ -325,8 +325,8 @@ if consentimiento:
                     "⏳ You've completed 50%! Keep going!"))
         
         st.divider()
-        st.markdown(t("### 🚀 ¡Seguimos! ¡Queda poco!"),
-                    ("### 🚀 Let's keep going! Almost done!"))
+        st.markdown(t("### 🚀 ¡Seguimos! ¡Queda poco!",
+                    "### 🚀 Let's keep going! Almost done!"))
         ##############################################################################################################
         # Estigma Familiar (Escala de 1-5) 🙈💔
         ##############################################################################################################
