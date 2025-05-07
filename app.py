@@ -104,7 +104,7 @@ if consentimiento:
         ########################################################################
         # 2. Relación Familiar
         ########################################################################
-        st.header(t("👨‍👩‍👦 Relación Familiar", "👨‍👩‍👦 Family Relationship"))
+        st.header(t("## 👨‍👩‍👦 Bloque 1", "## 👨‍👩‍👦 Block 1"))
         nombre_paciente = st.text_input(t("Nombre del paciente", "Patient's full name"))
         apellido_paciente = st.text_input(t("Apellido del paciente", "Patient's last name"))
         centro = st.text_input(t("Centro de atención", "Care center"))
@@ -164,11 +164,14 @@ if consentimiento:
         st.progress(15, text="⏳ Has completado aproximadamente el 15% del cuestionario")
         
         st.divider()
-        st.markdown("### 👨‍👩‍👧‍👦 ¡Ahora continuamos! Más preguntas sobre ti y tu familia.")
+        st.markdown(t("### 👨‍👩‍👧‍👦 ¡Ahora continuamos! Más preguntas sobre ti y tu familia."), 
+                    ("### 👨‍👩‍👧‍👦 Let's continue! More questions about you and your family."))
 
         ##############################################################################################################
         # Diferenciación del Self (Escala de 1-6) 🙇‍♀️🙇
         ##############################################################################################################
+        st.header(t("## 🙇 Bloque 2", 
+                    "## 🙇 Block 2"))
         st.write(t(
             "A continuación, encontrarás unas preguntas acerca de ti y de tus relaciones con los demás. Por favor, lee cuidadosamente cada pregunta y decide qué respuesta se corresponde con tu situación. Todas las respuestas son correctas; lo importante es que reflejen tu situación y tu experiencia.", 
             "Next, you will find some questions about yourself and your relationships with others. Please read each question carefully and decide which answer corresponds to your situation. All answers are correct; the important thing is that they reflect your situation and your experience."
@@ -242,15 +245,19 @@ if consentimiento:
             )
 
         # Barra de progreso de avance 📈
-        st.progress(35, text="⏳ ¡Ya has completado el 35% del cuestionario!")
+        st.progress(35, 
+                    text= t("⏳ ¡Ya has completado el 35% del cuestionario!",
+                    "⏳ You've completed 35% of the questionnaire!"))
         
         st.divider()
-        st.markdown("### 🌟 ¡Buen trabajo! Vamos a seguir...")
+        st.markdown(t("### 🌟 ¡Buen trabajo! Vamos a seguir..."),
+                    ("### 🌟 Good job! Let's continue..."))
 
         ##############################################################################################################
         # Funcionamiento Familiar (Escala de 1-5) 🏠💬
         ##############################################################################################################
-        st.markdown("## 🏡 Funcionamiento Familiar")
+        st.markdown(t("## 🏠 Bloque 3", 
+                      "## 🏠 Block 3"))
         st.write(t(
             "Valora cómo describen tu familia estas afirmaciones:",
             "Rate how these statements describe your family:"
@@ -313,14 +320,18 @@ if consentimiento:
             )
 
         # Barra de progreso de avance 📈
-        st.progress(50, text="⏳ ¡Has completado un 50%! ¡Ánimo!")
+        st.progress(50, 
+                    text=t("⏳ ¡Has completado un 50%! ¡Ánimo!",
+                    "⏳ You've completed 50%! Keep going!"))
         
         st.divider()
-        st.markdown("### 🚀 ¡Seguimos! ¡Queda poco!")
+        st.markdown(t("### 🚀 ¡Seguimos! ¡Queda poco!"),
+                    ("### 🚀 Let's keep going! Almost done!"))
         ##############################################################################################################
         # Estigma Familiar (Escala de 1-5) 🙈💔
         ##############################################################################################################
-        st.markdown("## 🙈 Estigma Familiar")
+        st.markdown(t("## 🙈 Bloque 4",
+                    "## 🙈 Block 4"))
         st.write(t(
             "¿En qué medida estas afirmaciones reflejan tu experiencia personal?",
             "To what extent do these statements reflect your personal experience?"
@@ -403,13 +414,17 @@ if consentimiento:
                 st.radio(f"**{i}. {pregunta}**", opciones_estigma, key=f"estigma_{i}")
             )
 
-        st.progress(70, text="⏳ ¡Ya has completado un 70%!")
+        st.progress(70, text=t("⏳ ¡Ya has completado un 70%!",
+                               "⏳ You've completed 70%!"))
         
         st.divider()
-        st.markdown("### 🌟 ¡Muy bien! Solo faltan las algunas preguntas...")
+        st.markdown(t("### 🌟 ¡Muy bien! Solo faltan las algunas preguntas...",
+                      "### 🌟 Very good! Just a few questions left..."))
         ##############################################################################################################
         # PHQ-4 (Ansiedad y Depresión) 😰😔
         ##############################################################################################################
+        st.markdown(t("## 🌟 Bloque 5",
+                    "## 🌟 Block 5"))
         st.write(t(
             "En las últimas dos semanas, ¿con qué frecuencia te han afectado los siguientes problemas?",
             "In the past two weeks, how often have you been bothered by the following problems?"
@@ -434,12 +449,14 @@ if consentimiento:
                 st.radio(f"**{i}. {pregunta}**", opciones_phq4, key=f"phq4_{i}")
             )
 
-        st.progress(75, text="⏳ ¡Completado 75%! ¡Ya falta poco!")
+        st.progress(75, text=t("⏳ ¡Completado 75%! ¡Ya falta poco!",
+                               "⏳ Completed 75%! Almost there!"))
 
         ##############################################################################################################
         # WEMWBS (Bienestar Psicológico) 🌈✨
         ##############################################################################################################
-        st.markdown("## 🌈 Sentimientos y Pensamientos")
+        st.markdown(t("## 🌈 Bloque 6",
+                    "## 🌈 Block 6"))
         st.write(t("Por favor, señale la casilla que mejor describa cómo se ha sentido durante las últimas 2 semanas.", 
             "Please check the box that best describes how you have felt during the last 2 weeks."))
 
@@ -465,12 +482,15 @@ if consentimiento:
                 st.radio(f"**{i}. {pregunta}**", opciones_wemwbs, key=f"wemwbs_{i}")
             )
 
-        st.progress(80, text="⏳ ¡Completado 80%! ¡Casi, casi!")
+        st.progress(80, text=t("⏳ ¡Completado 80%! ¡Casi, casi!",
+                               "⏳ Completed 80%! Almost there!"))
+        st.divider()
 
         ###############################################################################
         # Apoyo social (SSQ6)
         ###############################################################################
-        st.markdown("## 🤝 Apoyo Social")
+        st.markdown(t("## 🤝 Bloque 7",
+                      "## 🤝 Block 7"))
         st.write(t(
             "Las siguientes preguntas se refieren a personas de tu entorno que te ayudan o apoyan. Marca con qué satisfacción cuentas con su ayuda.",
             "The following questions refer to people in your environment who help or support you. Mark how satisfied you are with the help you receive."
@@ -505,13 +525,15 @@ if consentimiento:
                 st.radio(f"**{i}. {pregunta}**", opciones_ssq6, key=f"ssq6_{i}")
             )
 
-        st.progress(85, text="⏳ ¡Completado 85%! ¡Últimos pasitos!")
+        st.progress(85, text=t("⏳ ¡Completado 85%! ¡Últimos pasitos!",
+                               "⏳ Completed 85%! Last steps!"))
         st.divider()
 
         ###############################################################################
         # Zarit (Carga Emocional)
         ###############################################################################
-        st.markdown("## 😓 Carga Emocional")
+        st.markdown(t("### 🧠 Bloque 8",
+                      "### 🧠 Block 8"))
         st.write(t(
             "A continuación, se presenta una lista de afirmaciones que reflejan cómo se sienten a veces las personas que cuidan a otros. Indique con qué frecuencia se siente usted así:",
             "Below is a list of statements that reflect how caregivers sometimes feel. Indicate how often you feel this way:"
@@ -554,14 +576,17 @@ if consentimiento:
                 st.radio(f"**{i}. {pregunta}**", opciones_zarit, key=f"zarit_{i}")
             )
 
-        st.progress(90, text="⏳ ¡Completado 90%! ¡Ya casi terminamos!")	
+        st.progress(90, text=t("⏳ ¡Completado 90%! ¡Ya casi terminamos!",
+                               "⏳ Completed 90%! Almost done!"))
+        st.divider()	
 
         ###############################################################################
         # Autocompasión (SCS)
         ###############################################################################
 
 
-        st.markdown("## 💖 Autocompasión (SCS)")
+        st.markdown(t("## 💖 Bloque 9",
+                      "## 💖 Block 9"))
         st.write(t(
             "Piensa en cómo sueles reaccionar ante situaciones negativas. No hay respuestas correctas o incorrectas, simplemente tu experiencia.",
             "Think about how you typically react to negative events. There are no right or wrong answers, just your experience."
@@ -599,12 +624,15 @@ if consentimiento:
                 st.radio(f"**{i}. {pregunta}**", opciones_scs, key=f"scs_{i}")
             )
 
-        st.progress(95, text="⏳ ¡Completado 95%! ¡Uno más y terminamos!")
+        st.progress(95, text=t("⏳ ¡Completado 95%! ¡Uno más y terminamos!",
+                               "⏳ Completed 95%! One more and we're done!"))
+        st.divider()
 
         ###############################################################################
         # Satisfaccion con la IA
         ###############################################################################
-        st.markdown("## 🤖 Satisfacción con la IA")
+        st.markdown(t("## 🤖 Satisfacción con la IA",
+                      "## 🤖 Satisfaction with AI"))
 
         st.write(t("¿Cómo ha sido su experiencia con la herramienta de evaluación a través de la inteligencia artificial?", 
             "How has your experience been with the assessment tool through artificial intelligence?"))
@@ -663,7 +691,8 @@ if consentimiento:
                 st.radio(f"**{i}. {pregunta}**", opciones_ia, key=f"ia_{i}")
             )
 
-        st.progress(100, text="🏁 ¡100% Completado!")
+        st.progress(100, text=t("🏁 ¡100% Completado!",
+                                "🏁 100% Completed!"))
 
 
         ##############################################################################################################
