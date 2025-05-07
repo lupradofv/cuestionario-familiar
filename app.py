@@ -104,7 +104,8 @@ if consentimiento:
         ########################################################################
         # 2. Relación Familiar
         ########################################################################
-        st.header(t("##👨‍👩‍👦 Bloque 1", "##👨‍👩‍👦 Block 1"))
+        st.markdown(t("## 👨‍👩‍👦 Bloque 1",
+                    "## 👨‍👩‍👦 Block 1"))
         nombre_paciente = st.text_input(t("Nombre del paciente", "Patient's full name"))
         apellido_paciente = st.text_input(t("Apellido del paciente", "Patient's last name"))
         centro = st.text_input(t("Centro de atención", "Care center"))
@@ -161,7 +162,8 @@ if consentimiento:
             dificultad.append(otra_dificultad)
 
         # Barra de progreso de avance 📈
-        st.progress(15, text="⏳ Has completado aproximadamente el 15% del cuestionario")
+        st.progress(15, text=t("⏳ Has completado aproximadamente el 15% del cuestionario",
+                               "⏳ You've completed approximately 15% of the questionnaire"))
         
         st.divider()
         st.markdown(t("### 👨‍👩‍👧‍👦 ¡Ahora continuamos! Más preguntas sobre ti y tu familia.", 
@@ -170,7 +172,7 @@ if consentimiento:
         ##############################################################################################################
         # Diferenciación del Self (Escala de 1-6) 🙇‍♀️🙇
         ##############################################################################################################
-        st.header(t("## 🙇 Bloque 2", 
+        st.markdown(t("## 🙇 Bloque 2", 
                     "## 🙇 Block 2"))
         st.write(t(
             "A continuación, encontrarás unas preguntas acerca de ti y de tus relaciones con los demás. Por favor, lee cuidadosamente cada pregunta y decide qué respuesta se corresponde con tu situación. Todas las respuestas son correctas; lo importante es que reflejen tu situación y tu experiencia.", 
