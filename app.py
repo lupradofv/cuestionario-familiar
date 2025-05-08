@@ -746,8 +746,8 @@ if consentimiento:
             }
 
             #incompletos = comprobar_respuestas(respuestas)
-            incompletos = False
-            if incompletos:
+            incompletos = {}
+            if 1==0:
                 st.error(t(
                     "⚠️ Faltan respuestas en algunas secciones",
                     "⚠️ Some sections have missing answers"))
