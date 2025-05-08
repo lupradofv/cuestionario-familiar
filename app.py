@@ -772,7 +772,7 @@ if consentimiento:
                     "🎉 You have completed the questionnaire!"
                 ))
                 resultados = procesar_cuestionario(respuestas)
-                idx = asociar_id(nombre_familiar, apellido_familiar, SHEET_IDMAP)
+                idx = asociar_id(nombre_familiar, apellido_familiar, nombre_paciente, apellido_paciente, SHEET_IDMAP)
 
                 # Crear diccionario de resultados
                 datos_resultados = {
