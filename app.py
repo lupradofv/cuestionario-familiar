@@ -733,26 +733,25 @@ if consentimiento:
                         
             # Procesar respuestas
             respuestas = {
-                "datos": respuestas_0,
-                "familiar": respuestas_1,
-                "self": respuestas_2,
-                "faces": respuestas_3,
-                "afpem": respuestas_4,
-                "phq4": respuestas_5,
-                "wemwbs": respuestas_6,
-                "ssq6": respuestas_7,
-                "zarit": respuestas_8,
-                "scs": respuestas_9,
-                "ia": respuestas_10
+                "0": respuestas_0,
+                "1": respuestas_1,
+                "2": respuestas_2,
+                "3": respuestas_3,
+                "4": respuestas_4,
+                "5": respuestas_5,
+                "6": respuestas_6,
+                "7": respuestas_7,
+                "8": respuestas_8,
+                "9": respuestas_9,
+                "AI": respuestas_10
             }
 
             incompletos = comprobar_respuestas(respuestas)
-            st.write(incompletos)
             if incompletos:
                 st.error(t(
-                    "⚠️ Faltan respuestas en algunas secciones:",
-                    "⚠️ Some sections have missing answers:"))
-                with st.expander(t("Ver detalles", "See details"), expanded=True):
+                    "⚠️ Faltan respuestas en algunas secciones",
+                    "⚠️ Some sections have missing answers"))
+                with st.expander(t("Ver detalles", "See details"), expanded=False):
                     for bloque, preguntas in incompletos.items():
                         if isinstance(preguntas[0], int):
                             texto_preguntas = ", ".join(map(str, preguntas))
@@ -769,8 +768,8 @@ if consentimiento:
             else:
                 st.balloons()
                 st.success(t(
-                    "🎉 ¡Has llegado al final del cuestionario!",
-                    "🎉 You have reached the end of the questionnaire!"
+                    "🎉 ¡Has completado el cuestionario!",
+                    "🎉 You have completed the questionnaire!"
                 ))
                 resultados = procesar_cuestionario(respuestas)
                 idx = asociar_id(nombre_familiar, apellido_familiar, SHEET_IDMAP)
