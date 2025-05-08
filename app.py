@@ -4,8 +4,7 @@ import datetime
 import os
 import json
 
-from correccion import procesar_cuestionario
-from utils import asociar_id, comprobar_respuestas
+from utils import asociar_id, comprobar_respuestas, procesar_cuestionario
 
 # Si vas a usar Google Sheets
 USE_GOOGLE_SHEETS = True  
@@ -746,7 +745,8 @@ if consentimiento:
                 "AI": respuestas_10
             }
 
-            incompletos = comprobar_respuestas(respuestas)
+            #incompletos = comprobar_respuestas(respuestas)
+            incompletos = False
             if incompletos:
                 st.error(t(
                     "⚠️ Faltan respuestas en algunas secciones",
