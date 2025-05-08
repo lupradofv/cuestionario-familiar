@@ -747,9 +747,12 @@ if consentimiento:
                 "scs": respuestas_9,
                 "ia": respuestas_10
             }
-            if any("" in respuestas for respuestas in respuestas.values()):
-                st.error(t("⚠️ Hay preguntas sin responder. Por favor, completa todas las preguntas.", 
-                           "⚠️ There are unanswered questions. Please complete all questions."))
+            incompletos = [bloque for bloque, lista in respuestas.items() if "" in lista]
+            if incompletos:
+                st.error(t(
+                    f"⚠️ Faltan respuestas en: {', '.join(incompletos)}. Por favor, completa todas las preguntas.",
+                    f"⚠️ Missing answers in: {', '.join(incompletos)}. Please complete all questions."
+                ))
             else:
                 st.balloons()
                 resultados = procesar_cuestionario(respuestas)
