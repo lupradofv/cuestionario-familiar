@@ -59,7 +59,6 @@ consentimiento = st.checkbox(t(
 
 if consentimiento:
     with st.form("cuestionario"):
-        enviar = False
         st.write(t("Por favor, responde las siguientes preguntas...", "Please answer the following questions..."))
 
         ########################################################################
