@@ -745,9 +745,8 @@ if consentimiento:
                 "AI": respuestas_10
             }
 
-            #incompletos = comprobar_respuestas(respuestas)
-            incompletos = {}
-            if 1==0:
+            incompletos = comprobar_respuestas(respuestas)
+            if incompletos:
                 st.error(t(
                     "⚠️ Faltan respuestas en algunas secciones",
                     "⚠️ Some sections have missing answers"))
