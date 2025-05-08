@@ -269,7 +269,7 @@ if consentimiento:
         respuestas_2 = []
         
         for i, pregunta in enumerate(preguntas_self, 1):
-          respuestas_2.append(st.radio(f"**{i}. {pregunta}**", opciones_diferenciacion, key=f"zarit_{i}"))
+          respuestas_2.append(st.radio(f"**{i}. {pregunta}**", opciones_diferenciacion, key=f"self_{i}"))
 
         # Barra de progreso de avance 📈
         st.progress(35, 
