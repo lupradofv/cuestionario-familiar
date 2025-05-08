@@ -59,6 +59,7 @@ consentimiento = st.checkbox(t(
 
 if consentimiento:
     with st.form("cuestionario"):
+        enviar = False
         st.write(t("Por favor, responde las siguientes preguntas...", "Please answer the following questions..."))
 
         ########################################################################
@@ -100,6 +101,19 @@ if consentimiento:
             t("Nivel de estudios", "Level of education"),
             opciones_nivel_estudios_es if idioma == "Español" else opciones_nivel_estudios_en
         )
+
+        respuestas_0 = {
+            "Nombre": nombre_familiar,
+            "Apellido": apellido_familiar,
+            "Género": genero,
+            "Edad": edad,
+            "País": pais,
+            "Ciudad": ciudad,
+            "Estado civil": estado_civil,
+            "Estado laboral": estado_labora,
+            "Ingresos anuales": ingresos_anuales,
+            "Nivel de estudios": nivel_estudios
+        }
 
         ########################################################################
         # 2. Relación Familiar
@@ -160,6 +174,19 @@ if consentimiento:
         otra_dificultad = st.text_area(t("Otra dificultad", "Other difficulty"))
         if otra_dificultad:
             dificultad.append(otra_dificultad)
+
+
+        respuestas_1 = {
+            "Nombre paciente": nombre_paciente,
+            "Apellido paciente": apellido_paciente,
+            "Centro de atención": centro,
+            "Convive con paciente": convivencia,
+            "Relación": relacion,
+            "Relación antes enfermedad": relacion_antes,
+            "Relación ahora enfermedad": relacion_ahora,
+            "Última visita centro": ultima_visita,
+            "Dificultades asistencia": ", ".join(dificultad)
+        }
 
         # Barra de progreso de avance 📈
         st.progress(15, text=t("⏳ Has completado aproximadamente el 15% del cuestionario",
@@ -240,11 +267,14 @@ if consentimiento:
               "The people I love do not know my true thoughts or feelings about some things")
         ]
 
-        respuestas_self = []
+        respuestas_2 = []
+        
         for i, pregunta in enumerate(preguntas_self, 1):
-            respuestas_self.append(
-                st.radio(f"**{i}. {pregunta}**", opciones_diferenciacion, key=f"self_{i}")
-            )
+          respuesta = st.radio(f"**{i}. {pregunta}**", opciones_diferenciacion, key=f"zarit_{i}")
+          respuestas_2.append(respuesta)
+          if enviar and not respuesta:
+              st.markdown("<span style='color:red'>⚠️ Esta pregunta está sin responder.</span>", unsafe_allow_html=True)
+
 
         # Barra de progreso de avance 📈
         st.progress(35, 
@@ -315,9 +345,9 @@ if consentimiento:
                 "Family members discuss problems and feel good about the solutions found")
         ]
 
-        respuestas_funcionamiento = []
+        respuestas_3 = []
         for i, pregunta in enumerate(preguntas_funcionamiento, 1):
-            respuestas_funcionamiento.append(
+            respuestas_3.append(
                 st.radio(f"**{i}. {pregunta}**", opciones_funcionamiento, key=f"func_{i}")
             )
 
@@ -410,9 +440,9 @@ if consentimiento:
               "My self-esteem has deteriorated due to my family member's mental illness")
         ]
 
-        respuestas_estigma = []
+        respuestas_4 = []
         for i, pregunta in enumerate(preguntas_estigma, 1):
-            respuestas_estigma.append(
+            respuestas_4.append(
                 st.radio(f"**{i}. {pregunta}**", opciones_estigma, key=f"estigma_{i}")
             )
 
@@ -445,9 +475,9 @@ if consentimiento:
             t("Sentirse deprimido o desesperanzado", "Feeling down or hopeless")
         ]
 
-        respuestas_phq4 = []
+        respuestas_5 = []
         for i, pregunta in enumerate(preguntas_phq4, 1):
-            respuestas_phq4.append(
+            respuestas_5.append(
                 st.radio(f"**{i}. {pregunta}**", opciones_phq4, key=f"phq4_{i}")
             )
 
@@ -478,9 +508,9 @@ if consentimiento:
             t("He sido capaz de tomar mis propias decisiones", "I have been able to make my own decisions")
         ]
 
-        respuestas_wemwbs = []
+        respuestas_6 = []
         for i, pregunta in enumerate(preguntas_wemwbs, 1):
-            respuestas_wemwbs.append(
+            respuestas_6.append(
                 st.radio(f"**{i}. {pregunta}**", opciones_wemwbs, key=f"wemwbs_{i}")
             )
 
@@ -521,9 +551,9 @@ if consentimiento:
             "Count on someone to comfort you when you are very upset")
         ]
 
-        respuestas_ssq6 = []
+        respuestas_7 = []
         for i, pregunta in enumerate(preguntas_ssq6, 1):
-            respuestas_ssq6.append(
+            respuestas_7.append(
                 st.radio(f"**{i}. {pregunta}**", opciones_ssq6, key=f"ssq6_{i}")
             )
 
@@ -572,9 +602,9 @@ if consentimiento:
             t("En general: ¿Se siente muy sobrecargado por tener que cuidar de su familiar?", "In general: Do you feel very overwhelmed by having to care for your family member?")
         ]
 
-        respuestas_zarit = []
+        respuestas_8 = []
         for i, pregunta in enumerate(preguntas_zarit, 1):
-            respuestas_zarit.append(
+            respuestas_8.append(
                 st.radio(f"**{i}. {pregunta}**", opciones_zarit, key=f"zarit_{i}")
             )
 
@@ -620,9 +650,9 @@ if consentimiento:
             "I keep criticizing myself for the negative things I have felt, thought, said or done")
         ]
 
-        respuestas_scs = []
+        respuestas_9 = []
         for i, pregunta in enumerate(preguntas_scs, 1):
-            respuestas_scs.append(
+            respuestas_9.append(
                 st.radio(f"**{i}. {pregunta}**", opciones_scs, key=f"scs_{i}")
             )
 
@@ -687,9 +717,9 @@ if consentimiento:
               "The experience met all my explanation needs.")
         ]            
 
-        respuestas_ia = []
+        respuestas_10 = []
         for i, pregunta in enumerate(preguntas_ia, 1):
-            respuestas_ia.append(
+            respuestas_10.append(
                 st.radio(f"**{i}. {pregunta}**", opciones_ia, key=f"ia_{i}")
             )
 
@@ -712,15 +742,15 @@ if consentimiento:
                         
             # Procesar respuestas
             respuestas = {
-                "self": respuestas_self,
-                "faces": respuestas_funcionamiento,
-                "afpem": respuestas_estigma,
-                "phq4": respuestas_phq4,
-                "wemwbs": respuestas_wemwbs,
-                "ssq6": respuestas_ssq6,
-                "zarit": respuestas_zarit,
-                "scs": respuestas_scs,
-                "ia": respuestas_ia
+                "self": respuestas_2,
+                "faces": respuestas_3,
+                "afpem": respuestas_4,
+                "phq4": respuestas_5,
+                "wemwbs": respuestas_6,
+                "ssq6": respuestas_7,
+                "zarit": respuestas_8,
+                "scs": respuestas_9,
+                "ia": respuestas_10
             }
             resultados = procesar_cuestionario(respuestas)
             idx = asociar_id(nombre_familiar, apellido_familiar, SHEET_IDMAP)
