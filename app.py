@@ -270,11 +270,7 @@ if consentimiento:
         respuestas_2 = []
         
         for i, pregunta in enumerate(preguntas_self, 1):
-          respuesta = st.radio(f"**{i}. {pregunta}**", opciones_diferenciacion, key=f"zarit_{i}")
-          respuestas_2.append(respuesta)
-          if enviar and not respuesta:
-              st.markdown("<span style='color:red'>⚠️ Esta pregunta está sin responder.</span>", unsafe_allow_html=True)
-
+          respuestas_2.append(st.radio(f"**{i}. {pregunta}**", opciones_diferenciacion, key=f"zarit_{i}"))
 
         # Barra de progreso de avance 📈
         st.progress(35, 
@@ -738,7 +734,6 @@ if consentimiento:
         enviar = st.form_submit_button(t("📨 Enviar respuestas", "📨 Submit responses"))
 
         if enviar:
-            st.balloons()
                         
             # Procesar respuestas
             respuestas = {
@@ -752,49 +747,54 @@ if consentimiento:
                 "scs": respuestas_9,
                 "ia": respuestas_10
             }
-            resultados = procesar_cuestionario(respuestas)
-            idx = asociar_id(nombre_familiar, apellido_familiar, SHEET_IDMAP)
-
-            # Crear diccionario de resultados
-            datos_resultados = {
-                "Fecha": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-                "Idioma": idioma,
-                "ID": idx,
-                "Género": genero,
-                "Edad": edad,
-                "País": pais,
-                "Ciudad": ciudad,
-                "Estado civil": estado_civil,
-                "Estado laboral": estado_labora,
-                "Ingresos anuales": ingresos_anuales,
-                "Nivel de estudios": nivel_estudios,
-                "Nombre paciente": nombre_paciente,
-                "Apellido paciente": apellido_paciente,
-                "Centro de atención": centro,
-                "Convive con paciente": convivencia,
-                "Relación": relacion,
-                "Relación antes enfermedad": relacion_antes,
-                "Relación ahora enfermedad": relacion_ahora,
-                "Última visita centro": ultima_visita,
-                "Dificultades asistencia": ', '.join(dificultad),
-            }
-
-            # Guardar datos
-            if USE_GOOGLE_SHEETS:
-                datos = {**datos_resultados, **resultados}
-                if len(SHEET.get_all_records()) == 0:
-                  SHEET.append_row(COLUMNS_GOOGLE_SHEET)
-                fila = [datos.get(col, "") for col in COLUMNS_GOOGLE_SHEET]
-                SHEET.append_row(fila)
-                st.success(t(
-                "✅ ¡Respuestas enviadas correctamente! Muchísimas gracias por tu colaboración 💙",
-                "✅ Responses submitted successfully! Thank you very much for your collaboration 💙"
-                ))
+            if any("" in respuestas for respuestas in respuestas.values()):
+                st.error(t("⚠️ Hay preguntas sin responder. Por favor, completa todas las preguntas.", 
+                           "⚠️ There are unanswered questions. Please complete all questions."))
             else:
-                archivo = "respuestas_chatbot.csv"
-                existe = os.path.isfile(archivo)
-                pd.DataFrame([datos_resultados]).to_csv(archivo, mode='a', header=not existe, index=False)
-                st.success(t("✅ ¡Respuestas guardadas en archivo CSV!", "✅ Answers saved in CSV file!"))
+                st.balloons()
+                resultados = procesar_cuestionario(respuestas)
+                idx = asociar_id(nombre_familiar, apellido_familiar, SHEET_IDMAP)
+
+                # Crear diccionario de resultados
+                datos_resultados = {
+                    "Fecha": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+                    "Idioma": idioma,
+                    "ID": idx,
+                    "Género": genero,
+                    "Edad": edad,
+                    "País": pais,
+                    "Ciudad": ciudad,
+                    "Estado civil": estado_civil,
+                    "Estado laboral": estado_labora,
+                    "Ingresos anuales": ingresos_anuales,
+                    "Nivel de estudios": nivel_estudios,
+                    "Nombre paciente": nombre_paciente,
+                    "Apellido paciente": apellido_paciente,
+                    "Centro de atención": centro,
+                    "Convive con paciente": convivencia,
+                    "Relación": relacion,
+                    "Relación antes enfermedad": relacion_antes,
+                    "Relación ahora enfermedad": relacion_ahora,
+                    "Última visita centro": ultima_visita,
+                    "Dificultades asistencia": ', '.join(dificultad),
+                }
+
+                # Guardar datos
+                if USE_GOOGLE_SHEETS:
+                    datos = {**datos_resultados, **resultados}
+                    if len(SHEET.get_all_records()) == 0:
+                      SHEET.append_row(COLUMNS_GOOGLE_SHEET)
+                    fila = [datos.get(col, "") for col in COLUMNS_GOOGLE_SHEET]
+                    SHEET.append_row(fila)
+                    st.success(t(
+                    "✅ ¡Respuestas enviadas correctamente! Muchísimas gracias por tu colaboración 💙",
+                    "✅ Responses submitted successfully! Thank you very much for your collaboration 💙"
+                    ))
+                else:
+                    archivo = "respuestas_chatbot.csv"
+                    existe = os.path.isfile(archivo)
+                    pd.DataFrame([datos_resultados]).to_csv(archivo, mode='a', header=not existe, index=False)
+                    st.success(t("✅ ¡Respuestas guardadas en archivo CSV!", "✅ Answers saved in CSV file!"))
 
 else:
     st.warning(t(
