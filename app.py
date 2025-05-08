@@ -746,7 +746,8 @@ if consentimiento:
                 "scs": respuestas_9,
                 "ia": respuestas_10
             }
-            incompletos = [bloque for bloque, lista in respuestas.items() if any(r is None for r in lista)]
+            incompletos = [bloque for bloque, lista in respuestas.items() if any(r in ["", None] for r in lista)]
+            print(incompletos)
             if incompletos:
                 st.error(t(
                     f"⚠️ Faltan respuestas en: {', '.join(incompletos)}. Por favor, completa todas las preguntas.",
