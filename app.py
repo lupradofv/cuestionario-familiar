@@ -5,7 +5,8 @@ import os
 import json
 
 from correccion import procesar_cuestionario
-from utils import asociar_id
+from utils import asociar_id, comprobar_respuestas
+
 # Si vas a usar Google Sheets
 USE_GOOGLE_SHEETS = True  
 COLUMNS_GOOGLE_SHEET = [
@@ -725,10 +726,6 @@ if consentimiento:
         ##############################################################################################################
         # Últimas preguntas + envío de datos 🚀
         ##############################################################################################################
-        st.success(t(
-            "🎉 ¡Has llegado al final del cuestionario!",
-            "🎉 You have reached the end of the questionnaire!"
-        ))
 
         enviar = st.form_submit_button(t("📨 Enviar respuestas", "📨 Submit responses"))
 
@@ -749,22 +746,32 @@ if consentimiento:
                 "ia": respuestas_10
             }
 
-            incompletos = []
-            for bloque, contenido in respuestas.items():
-                if isinstance(contenido, dict):
-                    if any(r in ["", None] for r in contenido.values()):
-                        incompletos.append(bloque)
-                elif isinstance(contenido, list):
-                    if any(r in ["", None] for r in contenido):
-                        incompletos.append(bloque)
+            incompletos = comprobar_respuestas(respuestas)
             st.write(incompletos)
             if incompletos:
                 st.error(t(
-                    f"⚠️ Faltan respuestas en: {incompletos}. Por favor, completa todas las preguntas.",
-                    f"⚠️ Missing answers in: {incompletos}. Please complete all questions."
+                    "⚠️ Faltan respuestas en algunas secciones:",
+                    "⚠️ Some sections have missing answers:"))
+                with st.expander(t("Ver detalles", "See details"), expanded=True):
+                    for bloque, preguntas in incompletos.items():
+                        if isinstance(preguntas[0], int):
+                            texto_preguntas = ", ".join(map(str, preguntas))
+                            st.markdown(f"**{t('Bloque', 'Block')} {bloque}**: {texto_preguntas}")
+                        else:
+                            texto_preguntas = ", ".join(preguntas)
+                            st.markdown(f"**{t('Bloque', 'Block')} {bloque}**: {texto_preguntas}")
+
+                st.warning(t(
+                    "Por favor, revisa las preguntas destacadas antes de enviar.",
+                    "Please review the highlighted questions before submitting."
                 ))
+
             else:
                 st.balloons()
+                st.success(t(
+                    "🎉 ¡Has llegado al final del cuestionario!",
+                    "🎉 You have reached the end of the questionnaire!"
+                ))
                 resultados = procesar_cuestionario(respuestas)
                 idx = asociar_id(nombre_familiar, apellido_familiar, SHEET_IDMAP)
 

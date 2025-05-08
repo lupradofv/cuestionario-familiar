@@ -26,3 +26,30 @@ def asociar_id(nombre, apellido, SHEET_IDMAP):
         SHEET_IDMAP.append_row([id_participante, nombre.strip(), apellido.strip()])
 
     return id_participante
+
+def comprobar_respuestas_funciona(respuestas):
+    incompletos = {}
+    for bloque, contenido in respuestas.items():
+        if isinstance(contenido, dict):
+            if any(r in ["", None] for r in contenido.values()):
+                incompletos.append(bloque)
+        elif isinstance(contenido, list):
+            if any(r in ["", None] for r in contenido):
+                incompletos.append(bloque)
+
+    return incompletos
+
+def comprobar_respuestas(respuestas):
+    incompletos = {}
+
+    for bloque, contenido in respuestas.items():
+        if isinstance(contenido, dict):
+            faltantes = [campo for campo, valor in contenido.items() if valor in ["", None]]
+            if faltantes:
+                incompletos[bloque] = faltantes
+        elif isinstance(contenido, list):
+            faltantes = [i + 1 for i, valor in enumerate(contenido) if valor in ["", None]]
+            if faltantes:
+                incompletos[bloque] = faltantes
+
+    return incompletos
