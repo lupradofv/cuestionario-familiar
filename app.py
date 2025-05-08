@@ -206,10 +206,10 @@ if consentimiento:
         ))
     
         opciones_diferenciacion = [
-            "1 - Muy en desacuerdo", "2 - En desacuerdo", "3 - Más bien en desacuerdo",
+            "", "1 - Muy en desacuerdo", "2 - En desacuerdo", "3 - Más bien en desacuerdo",
             "4 - Más bien de acuerdo", "5 - De acuerdo", "6 - Muy de acuerdo"
         ] if idioma == "Español" else [
-            "1 - Strongly disagree", "2 - Disagree", "3 - Somewhat disagree",
+            "", "1 - Strongly disagree", "2 - Disagree", "3 - Somewhat disagree",
             "4 - Somewhat agree", "5 - Agree", "6 - Strongly agree"
         ]
 
@@ -269,7 +269,7 @@ if consentimiento:
         respuestas_2 = []
         
         for i, pregunta in enumerate(preguntas_self, 1):
-          respuestas_2.append(st.radio(f"**{i}. {pregunta}**", opciones_diferenciacion, key=f"self_{i}"))
+          respuestas_2.append(st.radio(f"**{i}. {pregunta}**", opciones_diferenciacion, key=f"self_{i}", index=0))
 
         # Barra de progreso de avance 📈
         st.progress(35, 
@@ -291,9 +291,9 @@ if consentimiento:
         ))
 
         opciones_funcionamiento = [
-            "1 - Nunca", "2 - Casi nunca", "3 - A veces", "4 - Casi siempre", "5 - Siempre"
+            "", "1 - Nunca", "2 - Casi nunca", "3 - A veces", "4 - Casi siempre", "5 - Siempre"
         ] if idioma == "Español" else [
-            "1 - Never", "2 - Rarely", "3 - Sometimes", "4 - Often", "5 - Always"
+            "", "1 - Never", "2 - Rarely", "3 - Sometimes", "4 - Often", "5 - Always"
         ]
 
         
@@ -343,7 +343,7 @@ if consentimiento:
         respuestas_3 = []
         for i, pregunta in enumerate(preguntas_funcionamiento, 1):
             respuestas_3.append(
-                st.radio(f"**{i}. {pregunta}**", opciones_funcionamiento, key=f"func_{i}")
+                st.radio(f"**{i}. {pregunta}**", opciones_funcionamiento, key=f"func_{i}", index=0)
             )
 
         # Barra de progreso de avance 📈
@@ -365,10 +365,10 @@ if consentimiento:
         ))
 
         opciones_estigma = [
-            "1 - Definitivamente falso", "2 - Mayormente falso", "3 - Ni verdadero ni falso", 
+            "", "1 - Definitivamente falso", "2 - Mayormente falso", "3 - Ni verdadero ni falso", 
             "4 - Mayormente verdadero", "5 - Definitivamente verdadero"
         ] if idioma == "Español" else [
-            "1 - Definitely false", "2 - Mostly false", "3 - Neither true nor false", 
+            "", "1 - Definitely false", "2 - Mostly false", "3 - Neither true nor false", 
             "4 - Mostly true", "5 - Definitely true"
         ]
 
@@ -438,7 +438,7 @@ if consentimiento:
         respuestas_4 = []
         for i, pregunta in enumerate(preguntas_estigma, 1):
             respuestas_4.append(
-                st.radio(f"**{i}. {pregunta}**", opciones_estigma, key=f"estigma_{i}")
+                st.radio(f"**{i}. {pregunta}**", opciones_estigma, key=f"estigma_{i}", index=0)
             )
 
         st.progress(70, text=t("⏳ ¡Ya has completado un 70%!",
@@ -459,9 +459,9 @@ if consentimiento:
 
         
         opciones_phq4 = [
-            "1 - Nunca", "2 - Varios días", "3 - Más de la mitad de los días", "4 - Casi todos los días"
+            "", "1 - Nunca", "2 - Varios días", "3 - Más de la mitad de los días", "4 - Casi todos los días"
         ] if idioma == "Español" else [
-            "1 - Not at all", "2 - Several days", "3 - More than half the days", "4 - Nearly every day"
+            "", "1 - Not at all", "2 - Several days", "3 - More than half the days", "4 - Nearly every day"
         ]
         preguntas_phq4 = [
             t("Sentirse nervioso o ansioso", "Feeling nervous or anxious"),
@@ -473,7 +473,7 @@ if consentimiento:
         respuestas_5 = []
         for i, pregunta in enumerate(preguntas_phq4, 1):
             respuestas_5.append(
-                st.radio(f"**{i}. {pregunta}**", opciones_phq4, key=f"phq4_{i}")
+                st.radio(f"**{i}. {pregunta}**", opciones_phq4, key=f"phq4_{i}", index=0)
             )
 
         st.progress(75, text=t("⏳ ¡Completado 75%! ¡Ya falta poco!",
@@ -488,9 +488,9 @@ if consentimiento:
             "Please check the box that best describes how you have felt during the last 2 weeks."))
 
         opciones_wemwbs = [
-            "1 - Nunca", "2 - Muy pocas veces", "3 - Algunas veces", "4 - Muchas veces", "5 - Siempre o casi siempre"
+            "", "1 - Nunca", "2 - Muy pocas veces", "3 - Algunas veces", "4 - Muchas veces", "5 - Siempre o casi siempre"
         ] if idioma == "Español" else [
-            "1 - Never", "2 - Very rarely", "3 - Sometimes", "4 - Often", "5 - Always or almost always"
+            "", "1 - Never", "2 - Very rarely", "3 - Sometimes", "4 - Often", "5 - Always or almost always"
         ]
 
         preguntas_wemwbs = [
@@ -506,7 +506,7 @@ if consentimiento:
         respuestas_6 = []
         for i, pregunta in enumerate(preguntas_wemwbs, 1):
             respuestas_6.append(
-                st.radio(f"**{i}. {pregunta}**", opciones_wemwbs, key=f"wemwbs_{i}")
+                st.radio(f"**{i}. {pregunta}**", opciones_wemwbs, key=f"wemwbs_{i}", index=0)
             )
 
         st.progress(80, text=t("⏳ ¡Completado 80%! ¡Casi, casi!",
@@ -524,10 +524,10 @@ if consentimiento:
         ))
 
         opciones_ssq6 = [
-            "1 - Muy insatisfecho", "2 - Bastante insatisfecho", "3 - Poco satisfecho",
+            "", "1 - Muy insatisfecho", "2 - Bastante insatisfecho", "3 - Poco satisfecho",
             "4 - Ni satisfecho ni insatisfecho", "5 - Bastante satisfecho", "6 - Muy satisfecho"
         ] if idioma == "Español" else [
-            "1 - Very dissatisfied", "2 - Quite dissatisfied", "3 - Not very satisfied",
+            "", "1 - Very dissatisfied", "2 - Quite dissatisfied", "3 - Not very satisfied",
             "4 - Neither satisfied nor dissatisfied", "5 - Quite satisfied", "6 - Very satisfied"
         ]
 
@@ -549,7 +549,7 @@ if consentimiento:
         respuestas_7 = []
         for i, pregunta in enumerate(preguntas_ssq6, 1):
             respuestas_7.append(
-                st.radio(f"**{i}. {pregunta}**", opciones_ssq6, key=f"ssq6_{i}")
+                st.radio(f"**{i}. {pregunta}**", opciones_ssq6, key=f"ssq6_{i}", index=0)
             )
 
         st.progress(85, text=t("⏳ ¡Completado 85%! ¡Últimos pasitos!",
@@ -567,9 +567,9 @@ if consentimiento:
         ))
 
         opciones_zarit = [
-            "1 - Nunca", "2 - Rara vez", "3 - A veces", "4 - Frecuentemente", "5 - Casi siempre"
+            "", "1 - Nunca", "2 - Rara vez", "3 - A veces", "4 - Frecuentemente", "5 - Casi siempre"
         ] if idioma == "Español" else [
-            "1 - Never", "2 - Rarely", "3 - Sometimes", "4 - Often", "5 - Almost always"
+            "", "1 - Never", "2 - Rarely", "3 - Sometimes", "4 - Often", "5 - Almost always"
         ]
 
         preguntas_zarit = [
@@ -600,7 +600,7 @@ if consentimiento:
         respuestas_8 = []
         for i, pregunta in enumerate(preguntas_zarit, 1):
             respuestas_8.append(
-                st.radio(f"**{i}. {pregunta}**", opciones_zarit, key=f"zarit_{i}")
+                st.radio(f"**{i}. {pregunta}**", opciones_zarit, key=f"zarit_{i}", index=0)
             )
 
         st.progress(90, text=t("⏳ ¡Completado 90%! ¡Ya casi terminamos!",
@@ -620,11 +620,11 @@ if consentimiento:
         ))
 
         opciones_scs = [
-            "1 - Siempre falso para mí", "2 - Casi siempre falso para mí", "3 - Más bien falso para mí",
+            "", "1 - Siempre falso para mí", "2 - Casi siempre falso para mí", "3 - Más bien falso para mí",
             "4 - Ni cierto ni falso para mí", "5 - Más bien cierto para mí", "6 - Casi siempre cierto para mí",
             "7 - Siempre cierto para mí"
         ] if idioma == "Español" else [
-            "1 - Always false for me", "2 - Almost always false for me", "3 - Mostly false for me",
+            "", "1 - Always false for me", "2 - Almost always false for me", "3 - Mostly false for me",
             "4 - Neither true nor false for me", "5 - Mostly true for me", "6 - Almost always true for me",
             "7 - Always true for me"
         ]
@@ -648,7 +648,7 @@ if consentimiento:
         respuestas_9 = []
         for i, pregunta in enumerate(preguntas_scs, 1):
             respuestas_9.append(
-                st.radio(f"**{i}. {pregunta}**", opciones_scs, key=f"scs_{i}")
+                st.radio(f"**{i}. {pregunta}**", opciones_scs, key=f"scs_{i}", index=0)
             )
 
         st.progress(95, text=t("⏳ ¡Completado 95%! ¡Uno más y terminamos!",
@@ -666,10 +666,10 @@ if consentimiento:
 
     
         opciones_ia = [
-            "1 - Muy en desacuerdo", "2 - En desacuerdo", "3 - Neutral",
+            "", "1 - Muy en desacuerdo", "2 - En desacuerdo", "3 - Neutral",
             "4 - De acuerdo", "5 - Muy de acuerdo"
         ] if idioma == "Español" else [
-            "1 - Strongly disagree", "2 - Disagree", "3 - Neutral",
+            "", "1 - Strongly disagree", "2 - Disagree", "3 - Neutral",
             "4 - Agree", "5 - Strongly agree"
         ] 
 
@@ -715,7 +715,7 @@ if consentimiento:
         respuestas_10 = []
         for i, pregunta in enumerate(preguntas_ia, 1):
             respuestas_10.append(
-                st.radio(f"**{i}. {pregunta}**", opciones_ia, key=f"ia_{i}")
+                st.radio(f"**{i}. {pregunta}**", opciones_ia, key=f"ia_{i}", index=0)
             )
 
         st.progress(100, text=t("🏁 ¡100% Completado!",
@@ -748,12 +748,20 @@ if consentimiento:
                 "scs": respuestas_9,
                 "ia": respuestas_10
             }
-            incompletos = [bloque for bloque, lista in respuestas.items() if any(r in ["", None] for r in lista)]
+
+            incompletos = []
+            for bloque, contenido in respuestas.items():
+                if isinstance(contenido, dict):
+                    if any(r in ["", None] for r in contenido.values()):
+                        incompletos.append(bloque)
+                elif isinstance(contenido, list):
+                    if any(r in ["", None] for r in contenido):
+                        incompletos.append(bloque)
             st.write(incompletos)
             if incompletos:
                 st.error(t(
-                    f"⚠️ Faltan respuestas en: {', '.join(incompletos)}. Por favor, completa todas las preguntas.",
-                    f"⚠️ Missing answers in: {', '.join(incompletos)}. Please complete all questions."
+                    f"⚠️ Faltan respuestas en: {incompletos}. Por favor, completa todas las preguntas.",
+                    f"⚠️ Missing answers in: {incompletos}. Please complete all questions."
                 ))
             else:
                 st.balloons()
