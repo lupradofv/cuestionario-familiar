@@ -6,7 +6,7 @@ from utils import extraer_valor, invertir_valor
 def procesar_cuestionario(respuestas):
 
     # 1. DSS-R
-    respuestas_self = [extraer_valor(r) for r in respuestas['self']]
+    respuestas_self = [extraer_valor(r) for r in respuestas['2']]
 
     indices_IP = [0,9,15,18,22]
     indices_ER = [3,6,12,19,23]
@@ -23,7 +23,7 @@ def procesar_cuestionario(respuestas):
     puntuacion_DSSR = (media_IP + (7 - media_ER) + (7 - media_FO) + (7 - media_DO) + (7 - media_EC)) / 5
 
     # 2. FACES-20Esp
-    respuestas_faces = [extraer_valor(r) for r in respuestas['faces']]
+    respuestas_faces = [extraer_valor(r) for r in respuestas['3']]
     cohesion = [respuestas_faces[i-1] for i in [1,4,5,8,10,11,13,15,17,19]]
     adaptabilidad = [respuestas_faces[i-1] for i in [2,3,6,7,9,12,14,16,18,20]]
     media_cohesion = sum(cohesion) / len(cohesion)
@@ -31,7 +31,7 @@ def procesar_cuestionario(respuestas):
     media_faces_total = sum(respuestas_faces) / len(respuestas_faces)
 
     # 3. AFPEM (Autoestigma)
-    respuestas_afpem = [extraer_valor(r) for r in respuestas['afpem']]
+    respuestas_afpem = [extraer_valor(r) for r in respuestas['4']]
     for idx in [0,10,17,25,26,27]:
         respuestas_afpem[idx] = invertir_valor(respuestas_afpem[idx], 5)
 
@@ -48,12 +48,12 @@ def procesar_cuestionario(respuestas):
     media_separacion = sum(separacion) / len(separacion)
 
     # 4. PHQ-2 y GAD-2
-    respuestas_phq4 = [extraer_valor(r) for r in respuestas['phq4']]
+    respuestas_phq4 = [extraer_valor(r) for r in respuestas['5']]
     ansiedad = sum(respuestas_phq4[0:2])
     depresion = sum(respuestas_phq4[2:4])
 
     # 5. Zarit
-    respuestas_zarit = [extraer_valor(r) for r in respuestas['zarit']]
+    respuestas_zarit = [extraer_valor(r) for r in respuestas['8']]
     for idx in [20,21]:
         respuestas_zarit[idx] = invertir_valor(respuestas_zarit[idx], 5)
 
