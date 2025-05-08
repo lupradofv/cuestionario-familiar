@@ -736,6 +736,8 @@ if consentimiento:
                         
             # Procesar respuestas
             respuestas = {
+                "datos": respuestas_0,
+                "familiar": respuestas_1,
                 "self": respuestas_2,
                 "faces": respuestas_3,
                 "afpem": respuestas_4,
@@ -747,7 +749,7 @@ if consentimiento:
                 "ia": respuestas_10
             }
             incompletos = [bloque for bloque, lista in respuestas.items() if any(r in ["", None] for r in lista)]
-            print(incompletos)
+            st.write(incompletos)
             if incompletos:
                 st.error(t(
                     f"⚠️ Faltan respuestas en: {', '.join(incompletos)}. Por favor, completa todas las preguntas.",
