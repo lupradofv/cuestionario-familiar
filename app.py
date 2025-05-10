@@ -20,7 +20,10 @@ COLUMNS_GOOGLE_SHEET = [
     "Puntuación Final DSS-R",
     "Media Cohesión FACES", "Media Adaptabilidad FACES", "Puntuación Total FACES",
     "Estereotipos AFPEM", "Culpabilidad AFPEM", "Devaluación AFPEM", "Discriminación AFPEM", "Separación AFPEM",
-    "PHQ-2 Ansiedad", "GAD-2 Depresión",
+    "PHQ-2 Ansiedad", "PHQ-2 Clasificación", "GAD-2 Depresión", "GAD-2 Clasificación",
+    "Bienestar Psicológico WEMWBS", "Interpretación Bienestar",
+    "Media Satisfacción SSQ-6", "Media Apoyo SSQ-6",
+    " Media HFS",
     "Total Zarit", "Nivel Sobrecarga Zarit"
 ]
 
@@ -547,10 +550,19 @@ if consentimiento:
         ]
 
         respuestas_7 = []
+        respuestas_7n = []
         for i, pregunta in enumerate(preguntas_ssq6, 1):
-            respuestas_7.append(
-                st.radio(f"**{i}. {pregunta}**", opciones_ssq6, key=f"ssq6_{i}", index=0)
+            st.markdown(f"**{i}. {pregunta}**")
+            satisfaccion = st.radio(
+                t("Nivel de satisfacción:", "Satisfaction level:"), 
+                opciones_ssq6, key=f"ssq6_satisf_{i}", index=0
             )
+            n_personas = st.number_input(
+                t("¿Cuántas personas te brindan este apoyo?", "How many people provide this support?"),
+                min_value=0, max_value=9, step=1, key=f"ssq6_num_{i}"
+            )
+            respuestas_7.append(satisfaccion)
+            respuestas_7n.append(n_personas)
 
         st.progress(85, text=t("⏳ ¡Completado 85%! ¡Últimos pasitos!",
                                "⏳ Completed 85%! Last steps!"))
@@ -740,6 +752,7 @@ if consentimiento:
                 "5": respuestas_5,
                 "6": respuestas_6,
                 "7": respuestas_7,
+                "7n": respuestas_7n,
                 "8": respuestas_8,
                 "9": respuestas_9,
                 "AI": respuestas_10

@@ -67,7 +67,7 @@ def comprobar_respuestas(respuestas):
 
 def procesar_cuestionario(respuestas):
 
-    # 1. DSS-R
+    # 1. DSS-R (revisado)
     respuestas_self = [extraer_valor(r) for r in respuestas['2']]
 
     indices_IP = [0,9,15,18,22]
@@ -84,7 +84,7 @@ def procesar_cuestionario(respuestas):
 
     puntuacion_DSSR = (media_IP + (7 - media_ER) + (7 - media_FO) + (7 - media_DO) + (7 - media_EC)) / 5
 
-    # 2. FACES-20Esp
+    # 2. FACES-20Esp (revisado)
     respuestas_faces = [extraer_valor(r) for r in respuestas['3']]
     cohesion = [respuestas_faces[i-1] for i in [1,4,5,8,10,11,13,15,17,19]]
     adaptabilidad = [respuestas_faces[i-1] for i in [2,3,6,7,9,12,14,16,18,20]]
@@ -92,7 +92,7 @@ def procesar_cuestionario(respuestas):
     media_adaptabilidad = sum(adaptabilidad) / len(adaptabilidad)
     media_faces_total = sum(respuestas_faces) / len(respuestas_faces)
 
-    # 3. AFPEM (Autoestigma)
+    # 3. AFPEM (Autoestigma) (revisado)
     respuestas_afpem = [extraer_valor(r) for r in respuestas['4']]
     for idx in [0,10,17,25,26,27]:
         respuestas_afpem[idx] = invertir_valor(respuestas_afpem[idx], 5)
@@ -109,12 +109,31 @@ def procesar_cuestionario(respuestas):
     media_discriminacion = sum(discriminacion) / len(discriminacion)
     media_separacion = sum(separacion) / len(separacion)
 
-    # 4. PHQ-2 y GAD-2
+    # 4. PHQ-2 y GAD-2 (revisado)
     respuestas_phq4 = [extraer_valor(r) for r in respuestas['5']]
-    ansiedad = sum(respuestas_phq4[0:2])
-    depresion = sum(respuestas_phq4[2:4])
+    ansiedad_valor = sum(respuestas_phq4[0:2])
+    depresion_valor = sum(respuestas_phq4[2:4])
+    ansiedad = 1 if ansiedad_valor >= 3 else 0
+    depresion = 1 if depresion_valor >= 3 else 0
 
-    # 5. Zarit
+    # 5. WEMWBS – Bienestar Psicológico  (revisado)
+    respuestas_wemwbs = [extraer_valor(r) for r in respuestas['6']]
+    suma_bienestar = sum(respuestas_wemwbs)
+    if suma_bienestar <= 17:
+        interpretacion_bienestar = "Bajo"
+    elif suma_bienestar <= 27:
+        interpretacion_bienestar = "Medio"
+    else:
+        interpretacion_bienestar = "Alto"
+
+    # 6. SSQ-6 – Satisfacción con Apoyo
+    respuestas_ssq6 = [extraer_valor(r) for r in respuestas['7']]
+    num_personas_ssq = respuestas.get('7n', [0]*6) 
+
+    media_satisfaccion_ssq = sum(respuestas_ssq6) / len(respuestas_ssq6)
+    media_apoyo_ssq = sum(num_personas_ssq) / sum(num_personas_ssq) if sum(num_personas_ssq) > 0 else 0
+
+    # 7. Zarit
     respuestas_zarit = [extraer_valor(r) for r in respuestas['8']]
     for idx in [20,21]:
         respuestas_zarit[idx] = invertir_valor(respuestas_zarit[idx], 5)
@@ -132,19 +151,39 @@ def procesar_cuestionario(respuestas):
     else:
         nivel_sobrecarga = "Sobrecarga intensa"
 
+    # 8. HFS – Subescala Perdón a Uno Mismo
+    respuestas_hfs = [extraer_valor(r) for r in respuestas['9']]
+    for idx in [1, 3, 5]:  # Ítems 2, 4, 6
+        respuestas_hfs[idx] = invertir_valor(respuestas_hfs[idx], 7)
+    media_hfs = sum(respuestas_hfs) / len(respuestas_hfs)
+
     # GUARDAR RESULTADOS
     resultados = {
         "Puntuación Final DSS-R": round(puntuacion_DSSR,2),
+
         "Media Cohesión FACES": round(media_cohesion,2),
         "Media Adaptabilidad FACES": round(media_adaptabilidad,2),
         "Puntuación Total FACES": round(media_faces_total,2),
+
         "Estereotipos AFPEM": round(media_estereotipos,2),
         "Culpabilidad AFPEM": round(media_culpabilidad,2),
         "Devaluación AFPEM": round(media_devaluacion,2),
         "Discriminación AFPEM": round(media_discriminacion,2),
         "Separación AFPEM": round(media_separacion,2),
-        "PHQ-2 Ansiedad": ansiedad,
-        "GAD-2 Depresión": depresion,
+
+        "PHQ-2 Ansiedad": ansiedad_valor,
+        "PHQ-2 Clasificación": "Positivo" if ansiedad else "Negativo",
+        "GAD-2 Depresión": depresion_valor,
+        "GAD-2 Clasificación": "Positivo" if depresion else "Negativo",
+
+        "Bienestar Psicológico WEMWBS": suma_bienestar,
+        "Interpretación Bienestar": interpretacion_bienestar,
+
+        "Media Satisfacción SSQ-6": round(media_satisfaccion_ssq,2),
+        "Media Apoyo SSQ-6": round(media_apoyo_ssq,2),
+
+        "Media HFS": round(media_hfs,2),
+
         "Total Zarit": total_zarit,
         "Nivel Sobrecarga Zarit": nivel_sobrecarga
     }
