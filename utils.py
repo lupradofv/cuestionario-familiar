@@ -156,6 +156,12 @@ def procesar_cuestionario(respuestas):
     for idx in [1, 3, 5]:  # Ítems 2, 4, 6
         respuestas_hfs[idx] = invertir_valor(respuestas_hfs[idx], 7)
     media_hfs = sum(respuestas_hfs) / len(respuestas_hfs)
+    if media_hfs < 3:
+        interpretacion_hfs = "Baja disposición al perdón hacia uno mismo"
+    elif 3 <= media_hfs < 5:
+        interpretacion_hfs = "Moderada disposición al perdón hacia uno mismo"
+    else:
+        interpretacion_hfs = "Alta disposición al perdón hacia uno mismo"
 
     # GUARDAR RESULTADOS
     resultados = {
@@ -182,10 +188,14 @@ def procesar_cuestionario(respuestas):
         "Media Satisfacción SSQ-6": round(media_satisfaccion_ssq,2),
         "Media Apoyo SSQ-6": round(media_apoyo_ssq,2),
 
-        "Media HFS": round(media_hfs,2),
-
+        "Sobrecarga Zarit": round(sum(sobrecarga),2),
+        "Rechazo Zarit": round(sum(rechazo),2),
+        "Competencia Zarit": round(sum(competencia),2),
         "Total Zarit": total_zarit,
-        "Nivel Sobrecarga Zarit": nivel_sobrecarga
+        "Nivel Sobrecarga Zarit": nivel_sobrecarga,
+
+        "Media HFS": round(media_hfs,2),
+        "Interpretación HFS": interpretacion_hfs
     }
     print("Resultados procesados:", resultados)
 

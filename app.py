@@ -23,8 +23,8 @@ COLUMNS_GOOGLE_SHEET = [
     "PHQ-2 Ansiedad", "PHQ-2 Clasificación", "GAD-2 Depresión", "GAD-2 Clasificación",
     "Bienestar Psicológico WEMWBS", "Interpretación Bienestar",
     "Media Satisfacción SSQ-6", "Media Apoyo SSQ-6",
-    " Media HFS",
-    "Total Zarit", "Nivel Sobrecarga Zarit"
+    "Sobrecarga Zarit", "Rechazo Zarit", "Competencia Zarit", "Total Zarit", "Nivel Sobrecarga Zarit",
+    "Media HFS", "Interpretación HFS"
 ]
 
 
