@@ -163,6 +163,17 @@ def procesar_cuestionario(respuestas):
     else:
         interpretacion_hfs = "Alta disposición al perdón hacia uno mismo"
 
+    # 9. Satisfacción con IA
+    respuestas_ia = [extraer_valor(r) for r in respuestas['AI']]
+    media_satisfaccion_ia = sum(respuestas_ia) / len(respuestas_ia)
+    if media_satisfaccion_ia <= 2.5:
+        interpretacion_ia = "Baja satisfacción"
+    elif media_satisfaccion_ia <= 4:
+        interpretacion_ia = "Satisfacción moderada"
+    else:
+        interpretacion_ia = "Alta satisfacción"
+
+
     # GUARDAR RESULTADOS
     resultados = {
         "Puntuación Final DSS-R": round(puntuacion_DSSR,2),
@@ -195,7 +206,10 @@ def procesar_cuestionario(respuestas):
         "Nivel Sobrecarga Zarit": nivel_sobrecarga,
 
         "Media HFS": round(media_hfs,2),
-        "Interpretación HFS": interpretacion_hfs
+        "Interpretación HFS": interpretacion_hfs,
+
+        "Media Satisfacción IA": round(media_satisfaccion_ia,2),
+        "Interpretación Satisfacción IA": interpretacion_ia
     }
     print("Resultados procesados:", resultados)
 

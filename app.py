@@ -24,7 +24,8 @@ COLUMNS_GOOGLE_SHEET = [
     "Bienestar Psicológico WEMWBS", "Interpretación Bienestar",
     "Media Satisfacción SSQ-6", "Media Apoyo SSQ-6",
     "Sobrecarga Zarit", "Rechazo Zarit", "Competencia Zarit", "Total Zarit", "Nivel Sobrecarga Zarit",
-    "Media HFS", "Interpretación HFS"
+    "Media HFS", "Interpretación HFS",
+    "Media Satisfacción IA", "Interpretación Satisfacción IA"
 ]
 
 
