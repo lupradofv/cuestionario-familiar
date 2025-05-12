@@ -20,9 +20,6 @@ def normalizar_texto(texto):
 
 def asociar_id(nombre, apellido, nombre_paciente, apellido_paciente, SHEET_IDMAP):
     # Asegurar encabezados
-    if len(SHEET_IDMAP.get_all_records()) == 0:
-        SHEET_IDMAP.append_row(["ID", "Nombre Familiar", "Apellido Familiar", "Nombre Paciente", "Apellido Paciente"])
-
     nombre_clave = f"{normalizar_texto(nombre)}|{normalizar_texto(apellido)}|{normalizar_texto(nombre_paciente)}|{normalizar_texto(apellido_paciente)}"
     idmap = SHEET_IDMAP.get_all_values()[1:]
 

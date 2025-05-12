@@ -38,6 +38,12 @@ if USE_GOOGLE_SHEETS:
     CLIENT = gspread.authorize(CREDS)
     SHEET = CLIENT.open("Respuestas Cuestionario IA").worksheet("Respuestas")
     SHEET_IDMAP = CLIENT.open("Respuestas Cuestionario IA").worksheet("Correspondencia")
+    if len(SHEET.get_all_records()) == 0:
+        SHEET.append_row(COLUMNS_GOOGLE_SHEET)
+    if len(SHEET_IDMAP.get_all_records()) == 0:
+        SHEET_IDMAP.append_row(["ID", "Nombre Familiar", "Apellido Familiar", "Nombre Paciente", "Apellido Paciente"])
+
+
 
 
 st.set_page_config(page_title="Cuestionario Familiar", page_icon="🧠")
@@ -814,8 +820,6 @@ if consentimiento:
                 # Guardar datos
                 if USE_GOOGLE_SHEETS:
                     datos = {**datos_resultados, **resultados}
-                    if len(SHEET.get_all_records()) == 0:
-                      SHEET.append_row(COLUMNS_GOOGLE_SHEET)
                     fila = [datos.get(col, "") for col in COLUMNS_GOOGLE_SHEET]
                     SHEET.append_row(fila)
                     st.success(t(
