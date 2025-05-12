@@ -27,6 +27,9 @@ COLUMNS_GOOGLE_SHEET = [
     "Media HFS", "Interpretación HFS",
     "Media Satisfacción IA", "Interpretación Satisfacción IA"
 ]
+COLUMNS_GOOGLE_SHEET_IDMAP = [
+    "ID", "Nombre Familiar", "Apellido Familiar", "Nombre Paciente", "Apellido Paciente"
+]
 
 
 if USE_GOOGLE_SHEETS:
@@ -38,11 +41,10 @@ if USE_GOOGLE_SHEETS:
     CLIENT = gspread.authorize(CREDS)
     SHEET = CLIENT.open("Respuestas Cuestionario IA").worksheet("Respuestas")
     SHEET_IDMAP = CLIENT.open("Respuestas Cuestionario IA").worksheet("Correspondencia")
-    if len(SHEET.get_all_records()) == 0:
-        SHEET.append_row(COLUMNS_GOOGLE_SHEET)
-    if len(SHEET_IDMAP.get_all_records()) == 0:
-        SHEET_IDMAP.append_row(["ID", "Nombre Familiar", "Apellido Familiar", "Nombre Paciente", "Apellido Paciente"])
-
+    if not SHEET.row_values(1):
+      SHEET.append_row(COLUMNS_GOOGLE_SHEET)
+    if not SHEET_IDMAP.row_values(1):
+      SHEET_IDMAP.append_row(COLUMNS_GOOGLE_SHEET_IDMAP)
 
 
 
